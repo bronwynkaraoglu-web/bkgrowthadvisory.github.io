@@ -51,7 +51,7 @@
         "name": "BK Growth Advisory",
         "description": "Fractional CMO and Growth Advisory services for B2B SaaS companies scaling from $10M to $100M+. Exit-stage experience, global reach, hands-on leadership.",
         "url": "https://bkgrowthadvisory.com",
-        "logo": "https://bkgrowthadvisory.com/bk-logo.png",
+        "logo": "https://bkgrowthadvisory.com/bk-logo-transparent.png",
         "image": "https://bkgrowthadvisory.com/bron-photo.png",
         "address": {
           "@type": "PostalAddress",
@@ -249,7 +249,7 @@
       position: fixed;
       inset: 0 0 auto 0;
       z-index: 200;
-      padding: 16px 0;
+      padding: 12px 0;
       transition: padding .3s, background .3s, border-color .3s;
       border-bottom: 1px solid transparent;
     }
@@ -269,9 +269,6 @@
       gap: 24px;
     }
 
-    /* bk-logo.png has a dark textured bg matching the site.
-       mix-blend-mode: lighten dissolves that bg into the page —
-       gold letterforms remain, dark logo bg becomes invisible. */
     .nav-logo {
       display: flex;
       align-items: center;
@@ -282,12 +279,17 @@
     .nav-logo:hover { opacity: .7; }
 
     .nav-logo img {
-      height: 48px;
+      /* Image canvas is 2000×2000px square with transparent padding around the mark.
+         Set height large enough that the logo content inside is clearly legible,
+         then claw back the excess whitespace with negative vertical margins. */
+      height: 200px;
       width: auto;
       display: block;
-      mix-blend-mode: lighten;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
+      margin: -60px 0;
+      background: none;
+      border: none;
+      padding: 0;
+      box-shadow: none;
     }
 
     .nav-links {
@@ -1070,7 +1072,6 @@
       height: 32px;
       width: auto;
       display: block;
-      mix-blend-mode: lighten;
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
     }
@@ -1174,8 +1175,8 @@
       .hamburger { display: flex; }
       .container { padding: 0 18px; }
 
-      /* Logo: 48→40px on mobile — still prominent, not overwhelming */
-      .nav-logo img { height: 40px; }
+      /* Logo canvas is 2000×2000px square; compensate for transparent padding */
+      .nav-logo img { height: 160px; margin: -48px 0; }
 
       #hero { padding: 145px 0 88px; }
       .hero-h1 { font-size: clamp(2.1rem, 8vw, 2.8rem); }
@@ -1205,10 +1206,8 @@
 
       <a href="#hero" class="nav-logo" aria-label="BK Growth Advisory home">
         <img
-          src="bk-logo.png"
+          src="bk-logo-transparent.png"
           alt="BK Growth Advisory"
-          width="288"
-          height="48"
           loading="eager"
         >
       </a>
@@ -1687,7 +1686,7 @@
       <div class="foot-wrap">
         <a href="#hero" class="foot-logo" aria-label="BK Growth Advisory home">
           <img
-            src="bk-logo.png"
+            src="bk-logo-transparent.png"
             alt="BK Growth Advisory"
             width="192"
             height="32"
