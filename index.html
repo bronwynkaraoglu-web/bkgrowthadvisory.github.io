@@ -2260,6 +2260,20 @@
       .then(function(response) {
         if (response.ok) {
           window.open('https://www.bkgrowthadvisory.com.au/Downloads/BK-Funnel-Health-Checklist.pdf', '_blank');
+
+          fetch('https://api.brevo.com/v3/contacts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'api-key': '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'
+            },
+            body: JSON.stringify({
+              email: document.querySelector('#checklist-form input[name="email"]').value,
+              listIds: [3],
+              updateEnabled: true
+            })
+          });
+
           document.getElementById('checklist-form').style.display = 'none';
           document.getElementById('checklist-success').style.display = 'block';
         } else {
