@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Bron Karaoglu | Fractional CMO &amp; Growth Advisor | B2B SaaS | Sydney, Australia</title>
-  <meta name="description" content="Fractional CMO and Growth Advisor for B2B SaaS companies scaling from $10M to $100M+. Exit-stage experience, global reach, hands-on leadership. Based in Sydney, Australia.">
+  <title>BK Growth Advisory | B2B SaaS Marketing Advisory | Sydney</title>
+  <meta name="description" content="Bron Karaoglu is a B2B SaaS marketing adviser and fractional CMO based in Sydney. A track record through ASX IPO, PE acquisition, and strategic sale. Working with Australian B2B SaaS companies from $2M ARR to exit.">
   <meta name="keywords" content="fractional CMO Australia, growth advisor B2B SaaS, fractional CMO Sydney, go-to-market strategy, B2B SaaS marketing, fractional CMO global, Bron Karaoglu">
   <meta name="author" content="Bron Karaoglu">
   <meta name="robots" content="index, follow">
@@ -19,8 +19,8 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="BK Growth Advisory">
-  <meta property="og:description" content="Strategic marketing and GTM advisory for B2B SaaS. Fractional CMO services for companies building with the end in mind.">
+  <meta property="og:title" content="BK Growth Advisory | B2B SaaS Marketing Advisory | Sydney">
+  <meta property="og:description" content="Exit-tested marketing leadership for B2B SaaS companies building toward something bigger. Based in Sydney. Working globally.">
   <meta property="og:url" content="https://bkgrowthadvisory.com/">
   <meta property="og:image" content="https://bkgrowthadvisory.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -29,9 +29,9 @@
   <meta property="og:locale" content="en_AU">
 
   <!-- Twitter / X Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="BK Growth Advisory">
-  <meta name="twitter:description" content="Strategic marketing and GTM advisory for B2B SaaS. Fractional CMO services for companies building with the end in mind.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="BK Growth Advisory | B2B SaaS Marketing Advisory | Sydney">
+  <meta name="twitter:description" content="Exit-tested marketing leadership for B2B SaaS companies building toward something bigger. Based in Sydney. Working globally.">
   <meta name="twitter:image" content="https://bkgrowthadvisory.com/og-image.jpg">
 
   <meta name="geo.region" content="AU-NSW">
@@ -39,7 +39,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400&family=Jost:wght@300;400;500;600&family=Raleway:wght@500;600&display=swap" rel="stylesheet">
 
   <script type="application/ld+json">
   {
@@ -49,7 +49,7 @@
         "@type": "ProfessionalService",
         "@id": "https://bkgrowthadvisory.com/#business",
         "name": "BK Growth Advisory",
-        "description": "Fractional CMO and Growth Advisory services for B2B SaaS companies scaling from $10M to $100M+. Exit-stage experience, global reach, hands-on leadership.",
+        "description": "B2B SaaS marketing advisory for companies from $2M ARR to exit. A track record through ASX IPO, PE acquisition, and strategic sale. Based in Sydney.",
         "url": "https://bkgrowthadvisory.com",
         "logo": "https://bkgrowthadvisory.com/bk-logo-transparent.png",
         "image": "https://bkgrowthadvisory.com/bron-photo.png",
@@ -522,21 +522,25 @@
       padding-top: 38px;
     }
 
-    /* Increased margin (20→24px) for breathing room before company names */
     .creds-label {
       font-size: 9.5px;
       font-weight: 600;
       letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--text-3);
-      margin-bottom: 24px;
     }
 
-    .creds-row {
+    /* Single-line layout: label + company names inline, baseline-aligned */
+    .creds-single-line {
       display: flex;
-      gap: 48px;
       flex-wrap: wrap;
-      align-items: flex-start;
+      align-items: baseline;
+      gap: 4px 10px;
+    }
+
+    .creds-single-line .creds-label {
+      flex-shrink: 0;
+      margin-right: 2px;
     }
 
     .cred-co {
@@ -545,7 +549,13 @@
       font-weight: 600;
       color: var(--cream);
       line-height: 1;
-      margin-bottom: 6px;
+      white-space: nowrap;
+    }
+
+    .creds-sep {
+      color: var(--text-3);
+      font-size: 1.1rem;
+      line-height: 1;
     }
 
     .cred-mi {
@@ -966,7 +976,7 @@
       line-height: 1.82;
     }
 
-    .faq-item.open .faq-a { max-height: 440px; }
+    .faq-item.open .faq-a { max-height: 600px; }
 
     /* =============================================
        CONTACT
@@ -1120,6 +1130,357 @@
     .foot-links a:hover { color: var(--text-2); }
 
     /* =============================================
+       HERO TAGLINE
+    ============================================= */
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.55rem, 3.2vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -.015em;
+      color: #C09B5A;
+      margin-top: 0;
+      margin-bottom: 28px;
+    }
+
+    /* =============================================
+       SECONDARY OUTLINE CTA BUTTON
+    ============================================= */
+    .btn-outline-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Jost', sans-serif;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: #C09B5A;
+      background: transparent;
+      border: 1px solid #C09B5A;
+      padding: 16px 28px;
+      border-radius: var(--r);
+      transition: background .2s, color .2s;
+    }
+
+    .btn-outline-gold:hover {
+      background: #C09B5A;
+      color: #162118;
+    }
+
+    /* =============================================
+       CREDENTIALLING BAR
+    ============================================= */
+    .cred-bar {
+      background: #1e2d20;
+      border-top: 1px solid rgba(192,155,90,.2);
+      border-bottom: 1px solid rgba(192,155,90,.2);
+      padding: 32px 0;
+    }
+
+    .cred-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cred-bar-item {
+      text-align: center;
+      padding: 8px 48px;
+    }
+
+    .cred-bar-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(192,155,90,.3);
+      flex-shrink: 0;
+    }
+
+    .cred-bar-outcome {
+      font-family: 'Raleway', sans-serif;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #C09B5A;
+      margin-bottom: 5px;
+    }
+
+    .cred-bar-company {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #D4C09A;
+      line-height: 1.1;
+    }
+
+    .cred-bar-detail {
+      font-size: .7rem;
+      color: #8C8070;
+      margin-top: 3px;
+      letter-spacing: .02em;
+    }
+
+    /* =============================================
+       GAS 3-STEP PROCESS (inside services)
+    ============================================= */
+    .gas-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin: 52px 0 64px;
+      padding: 40px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+    }
+
+    .gas-step { text-align: center; }
+
+    .gas-num {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: #C09B5A;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .gas-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+
+    .gas-body {
+      font-family: 'Inter', sans-serif;
+      font-size: .875rem;
+      color: var(--text-2);
+      line-height: 1.72;
+    }
+
+    /* =============================================
+       SPRINT CARDS
+    ============================================= */
+    .sprint-section-label {
+      margin-bottom: 24px;
+    }
+
+    .sprint-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .sprint-card {
+      background: var(--bg-1);
+      border: 1px solid rgba(192,155,90,.22);
+      border-radius: var(--r);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sprint-name {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+
+    .sprint-problem {
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+      font-size: .85rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sprint-output-label {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #C09B5A;
+      margin-bottom: 6px;
+    }
+
+    .sprint-output {
+      font-family: 'Inter', sans-serif;
+      font-size: .875rem;
+      color: var(--cream);
+      line-height: 1.68;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .sprint-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .sprint-timeline {
+      font-family: 'Inter', sans-serif;
+      font-size: .78rem;
+      color: #C09B5A;
+    }
+
+    .sprint-price {
+      font-family: 'Raleway', sans-serif;
+      font-size: .95rem;
+      font-weight: 600;
+      color: #C09B5A;
+    }
+
+    .sprint-footnote {
+      text-align: center;
+      font-size: .82rem;
+      color: #8C8070;
+      margin-top: 28px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* =============================================
+       SPRINT CTA STRIP
+    ============================================= */
+    .sprint-cta-strip {
+      margin-top: 64px;
+      padding: 48px;
+      border-top: 1px solid rgba(192,155,90,.22);
+      text-align: center;
+    }
+
+    .sprint-cta-h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 14px;
+    }
+
+    .sprint-cta-body {
+      font-family: 'Inter', sans-serif;
+      font-size: .97rem;
+      color: var(--text-2);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* =============================================
+       CHECKLIST SECTION
+    ============================================= */
+    #checklist {
+      background: #F5EFE0;
+      border-top: none;
+    }
+
+    #checklist .label { color: #C09B5A; }
+
+    .checklist-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .checklist-h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: #1E1E1E;
+      margin-bottom: 10px;
+      line-height: 1.15;
+    }
+
+    .checklist-sub {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #C09B5A;
+      margin-bottom: 22px;
+    }
+
+    .checklist-body {
+      font-family: 'Inter', sans-serif;
+      font-size: .97rem;
+      color: #1E1E1E;
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .checklist-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .checklist-input {
+      width: 100%;
+      max-width: 380px;
+      padding: 14px 18px;
+      border: 1px solid #C09B5A;
+      border-radius: 5px;
+      font-family: 'Inter', sans-serif;
+      font-size: .95rem;
+      background: #fff;
+      color: #1E1E1E;
+      outline: none;
+    }
+
+    .checklist-input:focus { border-color: #162118; }
+
+    .btn-checklist {
+      display: inline-block;
+      background: #162118;
+      color: #D4C09A;
+      font-family: 'Raleway', sans-serif;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .btn-checklist:hover { background: #1e2d20; }
+
+    .checklist-note {
+      font-family: 'Inter', sans-serif;
+      font-size: .75rem;
+      color: #8C8070;
+      margin-top: 4px;
+    }
+
+    .checklist-thanks {
+      display: none;
+      font-family: 'Inter', sans-serif;
+      font-size: .97rem;
+      color: #162118;
+      background: rgba(192,155,90,.15);
+      border: 1px solid #C09B5A;
+      border-radius: 5px;
+      padding: 16px 24px;
+      margin-top: 8px;
+    }
+
+    /* =============================================
        SCROLL REVEAL
     ============================================= */
     [data-sr] {
@@ -1150,6 +1511,8 @@
 
       .faq-grid { grid-template-columns: 1fr; gap: 44px; }
       .faq-side { position: static; }
+
+      .gas-steps { grid-template-columns: repeat(3, 1fr); }
 
       /* Steps: 4-col → 2-col, number beside text */
       .steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
@@ -1195,6 +1558,21 @@
 
       .foot-wrap { flex-direction: column; text-align: center; gap: 12px; }
       .foot-links { justify-content: center; }
+
+      .cred-bar-inner { flex-direction: column; gap: 0; }
+      .cred-bar-divider { width: 40px; height: 1px; margin: 0 auto; }
+      .cred-bar-item { padding: 16px 24px; }
+
+      .gas-steps { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
+      .gas-step { text-align: left; display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: start; }
+      .gas-num { font-size: 2rem; }
+
+      .sprint-grid { grid-template-columns: 1fr; }
+
+      .sprint-cta-strip { padding: 32px 20px; }
+
+      #checklist .checklist-form { align-items: stretch; }
+      #checklist .checklist-input { max-width: 100%; }
     }
   </style>
 </head>
@@ -1255,12 +1633,13 @@
         <div class="hero-tag">Fractional CMO &amp; Growth Advisor &nbsp;·&nbsp; Sydney, Australia &nbsp;·&nbsp; Global</div>
 
         <h1 class="hero-h1" id="hero-h1">
-          Strategic Marketing &amp; GTM for B2B SaaS
-          <span class="hero-h1-sub">building with the end in mind</span>
+          Turn your marketing into a predictable revenue engine
         </h1>
 
+        <div class="hero-tagline">Building with the end in mind.</div>
+
         <p class="hero-sub">
-          Bron Karaoglu works with B2B SaaS companies from $10M ARR through to exit. Global experience across Australia, the US, and APAC. A track record that includes an ASX IPO, a VC-to-PE growth journey, and a strategic acquisition.
+          Bron Karaoglu works with B2B SaaS companies from $2M ARR through to exit, across Australia, the US, APAC, and EMEA.
         </p>
 
         <div class="hero-ctas">
@@ -1270,33 +1649,46 @@
               <path d="M2 6.5h9M6.5 3l4 3.5-4 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-          <a href="#about" class="btn-ghost">
-            How Bron works
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-              <path d="M6.5 2v9M3 7.5l3.5 4 3.5-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <a href="#checklist" class="btn-outline-gold">
+            Download the Funnel Health Checklist
           </a>
         </div>
 
         <div class="hero-creds" aria-label="Selected experience">
-          <div class="creds-label">Selected experience includes</div>
-          <div class="creds-row">
-            <div class="cred-item">
-              <div class="cred-co">SiteMinder</div>
-              <div class="cred-mi">ASX IPO &nbsp;·&nbsp; $1B+ valuation</div>
-            </div>
-            <div class="cred-item">
-              <div class="cred-co">Ignition</div>
-              <div class="cred-mi">VC-backed &nbsp;·&nbsp; $100M+ ARR &nbsp;·&nbsp; PE acquisition</div>
-            </div>
-            <div class="cred-item">
-              <div class="cred-co">Genbook</div>
-              <div class="cred-mi">PLG model &nbsp;·&nbsp; Acquired by Booksy</div>
-            </div>
-          </div>
+          <p class="creds-single-line">
+            <span class="creds-label">Selected experience includes:</span>
+            <span class="cred-co">SiteMinder</span><span class="creds-sep">,</span>
+            <span class="cred-co">Ignition</span><span class="creds-sep">,</span>
+            <span class="cred-co">Genbook</span>
+          </p>
         </div>
       </div>
     </section>
+
+    <!-- CREDENTIALLING BAR -->
+    <div class="cred-bar" aria-label="Selected career outcomes">
+      <div class="container">
+        <div class="cred-bar-inner">
+          <div class="cred-bar-item">
+            <div class="cred-bar-outcome">ASX IPO</div>
+            <div class="cred-bar-company">SiteMinder</div>
+            <div class="cred-bar-detail">$1B+ market cap</div>
+          </div>
+          <div class="cred-bar-divider" aria-hidden="true"></div>
+          <div class="cred-bar-item">
+            <div class="cred-bar-outcome">PE Acquisition</div>
+            <div class="cred-bar-company">Ignition</div>
+            <div class="cred-bar-detail">$100M+ ARR</div>
+          </div>
+          <div class="cred-bar-divider" aria-hidden="true"></div>
+          <div class="cred-bar-item">
+            <div class="cred-bar-outcome">Strategic Sale</div>
+            <div class="cred-bar-company">Genbook</div>
+            <div class="cred-bar-detail">Acquired by Booksy</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ABOUT -->
     <section id="about" aria-labelledby="about-h2">
@@ -1322,7 +1714,10 @@
 
             <div class="about-body" data-sr data-delay="2">
               <p>
-                I'm Bron Karaoglu. Over the past fifteen years, I've held senior marketing roles at B2B SaaS companies across Australia, the US, and APAC, at every stage from early growth through to public market and acquisition.
+                I'm Bron Karaoglu. Based in Sydney. Experience across the Australian market, U.S. east coast, and Southeast Asia. Not as theory, but as executed programs.
+              </p>
+              <p>
+                Over the past fifteen years, I've held senior marketing roles at B2B SaaS companies at every stage from early growth through to public market and acquisition.
               </p>
               <p>
                 I was part of the marketing leadership team at <strong>SiteMinder</strong> during the company's trajectory to becoming an Australian unicorn, culminating in an ASX listing at a $1B+ valuation. I contributed to the marketing function at <strong>Ignition</strong> during the company's VC-backed growth to $100M+ ARR, ahead of a PE acquisition. At <strong>Genbook</strong>, I worked on the PLG growth model that supported the company's acquisition by Booksy.
@@ -1344,70 +1739,129 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- SERVICES / HOW WE WORK -->
     <section id="services" aria-labelledby="services-h2">
       <div class="container">
+
         <div class="srv-hd" data-sr>
-          <span class="label">What I Do</span>
-          <h2 class="h2" id="services-h2">Services</h2>
-          <p class="intro">Each engagement is built around your specific stage, goals, and gaps. These are the areas where I work.</p>
+          <span class="label">How It Works</span>
+          <h2 class="h2" id="services-h2">How It Works</h2>
+          <p class="intro">Most B2B SaaS companies at your stage have <strong>one or two</strong> specific marketing constraints limiting growth, not twenty. The Growth Acceleration System identifies yours, fixes it, and moves to the next one.</p>
         </div>
 
-        <div class="srv-grid">
+        <!-- 3-step GAS process -->
+        <div class="gas-steps" data-sr>
+          <div class="gas-step">
+            <div class="gas-num">01</div>
+            <h3 class="gas-title">Diagnose</h3>
+            <p class="gas-body">Find the binding constraint. Positioning, demand, funnel, retention, or team.</p>
+          </div>
+          <div class="gas-step">
+            <div class="gas-num">02</div>
+            <h3 class="gas-title">Fix</h3>
+            <p class="gas-body">Run a targeted sprint to resolve it. Clear scope, clear output, clear timeline.</p>
+          </div>
+          <div class="gas-step">
+            <div class="gas-num">03</div>
+            <h3 class="gas-title">Progress</h3>
+            <p class="gas-body">Move to the next constraint. Build momentum, not just a plan.</p>
+          </div>
+        </div>
 
-          <article class="srv-card" data-sr>
-            <div class="srv-icon" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M2.5 17V8.2L9.5 3l7 5.2V17M7 17v-5h5v5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <!-- Sprint cards -->
+        <div class="sprint-section-label" data-sr>
+          <span class="label">The Sprints</span>
+        </div>
+
+        <div class="sprint-grid">
+
+          <article class="sprint-card" data-sr>
+            <h3 class="sprint-name">Positioning &amp; Messaging Sprint</h3>
+            <p class="sprint-problem">"We're hard to explain in a crowded category."</p>
+            <div class="sprint-output-label">Output</div>
+            <p class="sprint-output">ICP definition, positioning statement, messaging hierarchy, website direction</p>
+            <div class="sprint-meta">
+              <span class="sprint-timeline">3–4 weeks</span>
+              <span class="sprint-price">From $8,000 AUD</span>
             </div>
-            <h3 class="srv-name">Fractional CMO</h3>
-            <p class="srv-desc">You need a marketing leader, not another manager. I own the function, from strategy and execution oversight through to team leadership and board reporting. Available on a part-time basis. Accountable on a full-time basis.</p>
           </article>
 
-          <article class="srv-card" data-sr data-delay="1">
-            <div class="srv-icon" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M9.5 2.5l6.5 3.8v5.4L9.5 15.5 3 11.7V6.3l6.5-3.8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.5 2.5v13M3 6.3l6.5 3.8 6.5-3.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <article class="sprint-card" data-sr data-delay="1">
+            <h3 class="sprint-name">Funnel &amp; Revenue Diagnosis</h3>
+            <p class="sprint-problem">"Something is broken in our funnel but we don't know where."</p>
+            <div class="sprint-output-label">Output</div>
+            <p class="sprint-output">Full funnel audit, root cause analysis, prioritised fix roadmap</p>
+            <div class="sprint-meta">
+              <span class="sprint-timeline">2–3 weeks</span>
+              <span class="sprint-price">From $6,000 AUD</span>
             </div>
-            <h3 class="srv-name">GTM Strategy</h3>
-            <p class="srv-desc">Define who you are selling to, how to reach them, and what makes you the obvious choice. Market segmentation, ICP definition, competitive positioning, channel mix, and sales-marketing alignment, built for your current stage and your next.</p>
           </article>
 
-          <article class="srv-card" data-sr data-delay="2">
-            <div class="srv-icon" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M3 14l3.5-3.5 3 2.5 3.5-5.5 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <article class="sprint-card" data-sr>
+            <h3 class="sprint-name">Demand Gen Engine Build</h3>
+            <p class="sprint-problem">"We are not generating enough quality demand."</p>
+            <div class="sprint-output-label">Output</div>
+            <p class="sprint-output">Demand strategy, campaign architecture, 90-day roadmap</p>
+            <div class="sprint-meta">
+              <span class="sprint-timeline">3–4 weeks</span>
+              <span class="sprint-price">From $10,000 AUD</span>
             </div>
-            <h3 class="srv-name">Demand Generation</h3>
-            <p class="srv-desc">Build a pipeline engine designed for your scale. Prioritised channels, real targets, and a model your team can run without me in the room. Whether you're building from scratch or fixing what's broken.</p>
           </article>
 
-          <article class="srv-card" data-sr data-delay="1">
-            <div class="srv-icon" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M4 4.5h11M4 8.5h8.5M4 12.5h7M4 16.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <article class="sprint-card" data-sr data-delay="1">
+            <h3 class="sprint-name">Retention &amp; Expansion Audit</h3>
+            <p class="sprint-problem">"Churn is high and growth is not compounding."</p>
+            <div class="sprint-output-label">Output</div>
+            <p class="sprint-output">NRR breakdown, ICP-level analysis, retention playbook</p>
+            <div class="sprint-meta">
+              <span class="sprint-timeline">2–3 weeks</span>
+              <span class="sprint-price">From $6,000 AUD</span>
             </div>
-            <h3 class="srv-name">Positioning &amp; Messaging</h3>
-            <p class="srv-desc">Positioning your buyers understand and your sales team can actually use. From category definition to copy architecture, sharpened for your market, your stage, and the investors you're talking to.</p>
           </article>
 
-          <article class="srv-card" data-sr data-delay="2">
-            <div class="srv-icon" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><circle cx="9.5" cy="6.5" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M4 16.5c0-3.04 2.46-5.5 5.5-5.5s5.5 2.46 5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <article class="sprint-card" data-sr>
+            <h3 class="sprint-name">Marketing Operating System</h3>
+            <p class="sprint-problem">"Our marketing is chaotic and not scaling."</p>
+            <div class="sprint-output-label">Output</div>
+            <p class="sprint-output">Team structure, role design, AI workflows, KPI system</p>
+            <div class="sprint-meta">
+              <span class="sprint-timeline">3–5 weeks</span>
+              <span class="sprint-price">From $10,000 AUD</span>
             </div>
-            <h3 class="srv-name">Marketing Team Build-Out</h3>
-            <p class="srv-desc">The right team structure for where you are, not where you aspire to be. Role scoping, hiring support, onboarding, and the operating rhythm to make them effective quickly.</p>
           </article>
 
-          <article class="srv-card" data-sr data-delay="3">
-            <div class="srv-icon" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><rect x="3" y="3" width="5.5" height="5.5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="10.5" y="3" width="5.5" height="5.5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="10.5" width="5.5" height="5.5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="10.5" y="10.5" width="5.5" height="5.5" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+          <article class="sprint-card" data-sr data-delay="1">
+            <h3 class="sprint-name">Growth Experiment Lab</h3>
+            <p class="sprint-problem">"We need new growth levers and don't know where to look."</p>
+            <div class="sprint-output-label">Output</div>
+            <p class="sprint-output">Opportunity map, experiment roadmap, test designs</p>
+            <div class="sprint-meta">
+              <span class="sprint-timeline">Ongoing</span>
+              <span class="sprint-price">From $5,000 AUD / month</span>
             </div>
-            <h3 class="srv-name">Board-Level Advisory</h3>
-            <p class="srv-desc">Marketing reporting that investors trust, board narratives that hold up under scrutiny, and strategic counsel when the stakes are high. Includes fundraise preparation and investor-ready pipeline reporting.</p>
           </article>
 
         </div>
 
+        <p class="sprint-footnote" data-sr>Each sprint is a standalone engagement. Most clients continue into a retainer after the first sprint.</p>
+
+        <!-- AI-first strip (Change 7) -->
         <div class="ai-strip" data-sr>
-          <span class="ai-strip-label">How I work</span>
-          <p class="ai-strip-body">AI-first ways of working are embedded in every engagement I run. I work across <strong>Claude, Gemini, and ChatGPT</strong> and bring that depth into the marketing workflows I build with teams — choosing the right tool for the task, at the lowest practical cost. The standard of work stays high. AI is a capability multiplier, not a shortcut. Most fractional CMOs are not operating at this level. That's a real point of difference.</p>
+          <span class="ai-strip-label">AI-native from day one, not as an add-on.</span>
+          <p class="ai-strip-body">Every engagement includes AI workflow design. That means AI-powered content production systems, automated reporting and attribution dashboards, AI-assisted competitive intelligence, and AI-enabled demand generation programs. The result is a leaner team that produces more output, and infrastructure that stays with you after the engagement ends.</p>
+          <p class="ai-strip-body" style="margin-top:12px;">I work across <strong>Claude, ChatGPT, Gemini</strong>, and purpose-built SaaS marketing tooling. I build that depth into your team, not just into my own work.</p>
+        </div>
+
+        <!-- Sprint CTA strip (Change 11) -->
+        <div class="sprint-cta-strip" data-sr>
+          <h3 class="sprint-cta-h3">Not sure which sprint is right for you?</h3>
+          <p class="sprint-cta-body">Book a 30-minute call. No pitch, no slides. We will work out together whether there is a fit and which constraint to tackle first.</p>
+          <a href="https://calendly.com/bronwynkaraoglu/30min" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Book a Discovery Call
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+              <path d="M2 6.5h9M6.5 3l4 3.5-4 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
         </div>
 
       </div>
@@ -1498,7 +1952,7 @@
             </div>
             <div>
               <h3 class="step-title">Discovery</h3>
-              <p class="step-body">A deep dive into your GTM motion, funnel performance, positioning, and team. What's working, what isn't, and where the highest-leverage opportunities sit.</p>
+              <p class="step-body">A deep dive into your GTM motion, funnel performance, positioning, and team. What's working, what isn't, and where the most valuable opportunities are.</p>
             </div>
           </div>
 
@@ -1522,6 +1976,29 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- FUNNEL HEALTH CHECKLIST -->
+    <section id="checklist" aria-labelledby="checklist-h2">
+      <div class="container">
+        <div class="checklist-wrap" data-sr>
+          <span class="label">Free Resource</span>
+          <h2 class="checklist-h2" id="checklist-h2">The Funnel Health Checklist</h2>
+          <p class="checklist-sub">15 signals that tell you where revenue is leaking.</p>
+          <p class="checklist-body">If pipeline is unpredictable, it is usually one of fifteen things. This checklist walks through each one. It takes 10 minutes to read and gives you a clear starting point before any conversation.</p>
+
+          <div id="checklist-wrapper">
+            <form class="checklist-form" id="checklist-form">
+              <input type="email" name="email" class="checklist-input" placeholder="Your work email" required aria-label="Your work email">
+              <button type="submit" class="btn-checklist">Send me the checklist</button>
+              <p class="checklist-note">No sequences. No sales follow-up. One email with the PDF.</p>
+            </form>
+            <p id="checklist-success" style="display:none; color:#D4C09A; font-family: Inter, sans-serif; font-size: 1rem; line-height: 1.65;">
+              You are all set. Check your inbox — the checklist is on its way.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -1571,7 +2048,7 @@
                 </span>
               </button>
               <div class="faq-a" id="fa3">
-                <div class="faq-a-inner">Usually when you have grown past founder-led marketing but are not yet ready to hire a full-time CMO. Common signals: your pipeline has stalled and you don't know why; you're preparing for a funding round and need to sharpen the marketing story; you've just taken on PE or institutional investment and marketing needs to perform as part of a value creation plan; or you're entering a new market and need a senior operator to lead it.</div>
+                <div class="faq-a-inner">Usually when you have grown past founder-led marketing but are not yet ready to hire a full-time CMO. A fractional engagement makes sense when you need senior strategic input but are not yet at the stage where a full-time CMO hire is the best use of capital. Common signals: your pipeline has stalled and you don't know why; you're preparing for a funding round and need to sharpen the marketing story; you've just taken on PE or institutional investment and marketing needs to perform as part of a value creation plan; or you're entering a new market and need a senior operator to lead it.</div>
               </div>
             </div>
 
@@ -1631,7 +2108,31 @@
                 </span>
               </button>
               <div class="faq-a" id="fa8">
-                <div class="faq-a-inner">The right fit is B2B SaaS companies at $2M to $100M+ ARR, at the growth phase where marketing strategy has a genuine impact on trajectory, valuation, and exit readiness.</div>
+                <div class="faq-a-inner">The right fit is B2B SaaS companies at $2M+ ARR, at the growth phase where marketing strategy has a genuine impact on trajectory, valuation, and exit readiness.</div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false" aria-controls="fa9">
+                Do you work with companies outside Australia?
+                <span class="faq-plus" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </span>
+              </button>
+              <div class="faq-a" id="fa9">
+                <div class="faq-a-inner">Yes. The sprints and retainer work well remotely. I have run programs in the U.S. east coast market and across Southeast Asia. If you are an Australian company with U.S. or APAC expansion ambitions, that experience is directly relevant.</div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false" aria-controls="fa10">
+                What is the Growth Acceleration System?
+                <span class="faq-plus" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </span>
+              </button>
+              <div class="faq-a" id="fa10">
+                <div class="faq-a-inner">It is the model behind every engagement. Rather than open-ended advisory, every piece of work starts with a clear diagnosis of your primary marketing constraint. We run a targeted sprint to fix it, then move to the next one. You always know what you are buying, what the output is, and what comes next.</div>
               </div>
             </div>
 
@@ -1745,5 +2246,30 @@
     });
   </script>
 
+  <script>
+    document.getElementById('checklist-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      var data = new FormData(form);
+
+      fetch('https://formspree.io/f/mbdqdwlq', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(response) {
+        if (response.ok) {
+          window.open('https://www.bkgrowthadvisory.com.au/Downloads/BK-Funnel-Health-Checklist.pdf', '_blank');
+          document.getElementById('checklist-form').style.display = 'none';
+          document.getElementById('checklist-success').style.display = 'block';
+        } else {
+          alert('Something went wrong. Please try again or email bron@bkgrowthadvisory.com.au directly.');
+        }
+      })
+      .catch(function() {
+        alert('Something went wrong. Please try again or email bron@bkgrowthadvisory.com.au directly.');
+      });
+    });
+  </script>
 </body>
 </html>
