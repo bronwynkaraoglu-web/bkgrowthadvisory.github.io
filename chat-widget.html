@@ -1,0 +1,376 @@
+<!--
+  BK Growth Advisory — AI Chat Widget
+  Paste entire contents just before </body> in index.html
+-->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Raleway:wght@300;400;500&display=swap');
+
+  #bk-chat-widget * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #bk-chat-trigger {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 56px; height: 56px;
+    background: #162118; border: 1.5px solid #C09B5A; border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    z-index: 9999; opacity: 0; transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  }
+  #bk-chat-trigger.visible { opacity: 1; transform: translateY(0); }
+  #bk-chat-trigger:hover { background: #1e2d1f; }
+  #bk-chat-trigger svg { width: 22px; height: 22px; fill: #D4C09A; }
+  #bk-chat-trigger .close-icon { display: none; }
+  #bk-chat-trigger.open .chat-icon { display: none; }
+  #bk-chat-trigger.open .close-icon { display: block; }
+  #bk-chat-trigger::after {
+    content: ''; position: absolute; width: 100%; height: 100%;
+    border-radius: 50%; border: 1.5px solid #C09B5A;
+    animation: bk-pulse 2.5s ease-out infinite; opacity: 0;
+  }
+  @keyframes bk-pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+
+  #bk-chat-panel {
+    position: fixed; bottom: 96px; right: 28px;
+    width: 360px; max-height: 520px;
+    background: #162118; border: 1px solid #C09B5A; border-radius: 4px;
+    display: flex; flex-direction: column; z-index: 9998;
+    opacity: 0; transform: translateY(16px) scale(0.97); pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5); overflow: hidden;
+  }
+  #bk-chat-panel.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+
+  #bk-chat-header {
+    background: #162118; border-bottom: 1px solid #2a3a2b;
+    padding: 14px 18px; display: flex; align-items: center; gap: 10px;
+  }
+  #bk-chat-header .bk-logo-mark {
+    font-family: 'Cormorant Garamond', serif; font-weight: 600;
+    font-size: 18px; color: #D4C09A; line-height: 1; letter-spacing: -0.02em;
+  }
+  #bk-chat-header .bk-logo-mark span { color: #8A9E52; }
+  #bk-chat-header .bk-header-text { flex: 1; }
+  #bk-chat-header .bk-header-title {
+    font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 13px;
+    color: #D4C09A; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  #bk-chat-header .bk-header-sub {
+    font-family: 'Raleway', sans-serif; font-weight: 300; font-size: 11px;
+    color: #8C8070; margin-top: 2px; letter-spacing: 0.02em;
+  }
+  .bk-status-dot {
+    width: 7px; height: 7px; background: #8A9E52; border-radius: 50%; flex-shrink: 0;
+    animation: bk-blink 2s ease-in-out infinite;
+  }
+  @keyframes bk-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  #bk-chat-messages {
+    flex: 1; overflow-y: auto; padding: 16px;
+    display: flex; flex-direction: column; gap: 12px;
+    scrollbar-width: thin; scrollbar-color: #2a3a2b transparent;
+  }
+  #bk-chat-messages::-webkit-scrollbar { width: 4px; }
+  #bk-chat-messages::-webkit-scrollbar-track { background: transparent; }
+  #bk-chat-messages::-webkit-scrollbar-thumb { background: #2a3a2b; border-radius: 2px; }
+
+  .bk-msg {
+    max-width: 88%; font-family: 'Raleway', sans-serif;
+    font-size: 13.5px; line-height: 1.6; font-weight: 400;
+    animation: bk-fade-in 0.25s ease;
+  }
+  @keyframes bk-fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .bk-msg.assistant { color: #D4C09A; align-self: flex-start; }
+  .bk-msg.user {
+    color: #F5EFE0; align-self: flex-end;
+    background: #1e2d1f; border: 1px solid #2a3a2b;
+    border-radius: 3px; padding: 8px 12px;
+  }
+
+  .bk-typing { align-self: flex-start; display: flex; gap: 4px; align-items: center; padding: 4px 0; }
+  .bk-typing span {
+    width: 5px; height: 5px; background: #C09B5A; border-radius: 50%;
+    animation: bk-dot 1.2s infinite ease-in-out;
+  }
+  .bk-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .bk-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bk-dot {
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  #bk-capture-form {
+    border-top: 1px solid #2a3a2b; padding: 12px 16px;
+    display: none; flex-direction: column; gap: 8px; background: #111c12;
+  }
+  #bk-capture-form.visible { display: flex; }
+  #bk-capture-form p {
+    font-family: 'Raleway', sans-serif; font-size: 12px;
+    color: #8C8070; letter-spacing: 0.02em;
+  }
+  #bk-capture-form .bk-fields { display: flex; gap: 6px; }
+  #bk-capture-form input {
+    flex: 1; background: #162118; border: 1px solid #2a3a2b; border-radius: 3px;
+    padding: 7px 10px; font-family: 'Raleway', sans-serif; font-size: 12.5px;
+    color: #D4C09A; outline: none; transition: border-color 0.2s;
+  }
+  #bk-capture-form input::placeholder { color: #4a5c4b; }
+  #bk-capture-form input:focus { border-color: #C09B5A; }
+  #bk-capture-form button {
+    background: #C09B5A; color: #162118; border: none; border-radius: 3px;
+    padding: 7px 14px; font-family: 'Raleway', sans-serif; font-size: 12px;
+    font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+    cursor: pointer; white-space: nowrap; transition: background 0.2s;
+  }
+  #bk-capture-form button:hover { background: #d4aa6a; }
+
+  #bk-chat-input-area {
+    border-top: 1px solid #2a3a2b; padding: 10px 12px;
+    display: flex; gap: 8px; align-items: flex-end; background: #162118;
+  }
+  #bk-chat-input {
+    flex: 1; background: transparent; border: none; outline: none;
+    font-family: 'Raleway', sans-serif; font-size: 13.5px; color: #F5EFE0;
+    resize: none; line-height: 1.5; max-height: 80px; overflow-y: auto;
+  }
+  #bk-chat-input::placeholder { color: #4a5c4b; }
+  #bk-chat-send {
+    background: none; border: 1px solid #C09B5A; border-radius: 3px;
+    width: 32px; height: 32px; display: flex; align-items: center;
+    justify-content: center; cursor: pointer; flex-shrink: 0; transition: background 0.2s;
+  }
+  #bk-chat-send:hover { background: #C09B5A22; }
+  #bk-chat-send svg { width: 14px; height: 14px; fill: #C09B5A; }
+  #bk-chat-send:disabled { opacity: 0.35; cursor: default; }
+
+  @media (max-width: 480px) {
+    #bk-chat-panel { right: 12px; left: 12px; width: auto; bottom: 88px; }
+    #bk-chat-trigger { right: 20px; bottom: 20px; }
+  }
+</style>
+
+<div id="bk-chat-widget">
+
+  <button id="bk-chat-trigger" aria-label="Chat with BK Growth Advisory">
+    <svg class="chat-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 10H6v-2h12v2zm0-3H6V7h12v2z"/></svg>
+    <svg class="close-icon" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+  </button>
+
+  <div id="bk-chat-panel" role="dialog" aria-label="BK Growth Advisory chat">
+
+    <div id="bk-chat-header">
+      <div class="bk-logo-mark">B<span>K</span></div>
+      <div class="bk-header-text">
+        <div class="bk-header-title">Growth Advisory</div>
+        <div class="bk-header-sub">Ask me anything about working with Bron</div>
+      </div>
+      <div class="bk-status-dot"></div>
+    </div>
+
+    <div id="bk-chat-messages"></div>
+
+    <div id="bk-capture-form">
+      <p>Want Bron to follow up with you directly?</p>
+      <div class="bk-fields">
+        <input type="text" id="bk-name" placeholder="Your name" />
+        <input type="email" id="bk-email" placeholder="Email address" />
+      </div>
+      <button id="bk-capture-submit">Send</button>
+    </div>
+
+    <div id="bk-chat-input-area">
+      <textarea id="bk-chat-input" rows="1" placeholder="Ask a question..."></textarea>
+      <button id="bk-chat-send" aria-label="Send">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+
+  const WORKER_URL   = 'https://bk-chat-proxy.bronwynkaraoglu.workers.dev/';
+  const FORMSPREE_ID = 'mbdqdwlq';
+
+  const SYSTEM_PROMPT = `You are a helpful assistant on the BK Growth Advisory website. Answer questions about Bron Karaoglu and her advisory services. Be warm, direct, and knowledgeable. Keep answers short — two to four sentences unless a question genuinely needs more. Never make up pricing, timelines, or promises. If you do not know something, say so and suggest the visitor reach out.
+
+ABOUT BRON
+Bron Karaoglu is a fractional CMO and growth advisor based in Sydney, Australia. She works with B2B SaaS companies from $2M ARR through to exit, across Australia, New Zealand, the US, the UK, and APAC. She has 15+ years of senior marketing experience at companies including SiteMinder (ASX IPO, $1B+ market cap), Ignition ($100M+ ARR, PE acquisition), and Genbook (acquired by Booksy). She works directly with founders, CEOs, and marketing leaders who need senior marketing strategy without the overhead of a full-time CMO hire.
+
+HOW SHE WORKS
+The model is diagnosis-first, sprint-based. Most B2B SaaS companies have one or two specific marketing constraints limiting growth. Bron identifies the binding constraint and runs a targeted sprint to fix it, then moves to the next one. Every engagement starts with a clear output, scope, and timeline. Sprints are standalone engagements; most clients continue into a retainer afterwards.
+
+THE SPRINTS
+- Positioning and Messaging Sprint: ICP definition, positioning statement, messaging hierarchy, website direction. 3-4 weeks, from $8,000 AUD.
+- Funnel and Revenue Diagnosis: Full funnel audit, root cause analysis, prioritised fix roadmap. 2-3 weeks, from $6,000 AUD.
+- Demand Gen Engine Build: Demand strategy, campaign architecture, 90-day roadmap. 3-4 weeks, from $10,000 AUD.
+- Retention and Expansion Audit: NRR breakdown, ICP-level analysis, retention playbook. 2-3 weeks, from $6,000 AUD.
+- Marketing Operating System: Team structure, role design, AI workflows, KPI system. 3-5 weeks, from $10,000 AUD.
+- Growth Experiment Lab: Opportunity map, experiment roadmap, test designs. Ongoing, from $5,000 AUD/month.
+Sprint prices are starting points. Direct people to book a call for a specific conversation.
+
+RETAINER ENGAGEMENTS
+Bron works on monthly retainers for ongoing fractional CMO support. Minimum three-month commitment; most engagements run 12-24 months. Do not quote retainer pricing — direct them to reach out.
+
+WHO IS THE RIGHT FIT
+B2B SaaS companies at $2M+ ARR with proven product-market fit. Founders past founder-led marketing. PE or VC-backed businesses. Companies preparing for a Series B, C, or growth round. Businesses expanding into Australia, the US, or APAC. Not the right fit: pre-revenue companies, generalist agency seekers, or purely tactical execution without strategic leadership.
+
+CAPACITY
+Bron works with a small number of clients at any one time. If asked about availability, direct them to book a call or email to check.
+
+CONTACT AND BOOKING
+Book a discovery call: calendly.com/bronwynkaraoglu/30min
+Email: bron@bkgrowthadvisory.com.au
+If someone wants to engage, encourage them to book a call or share their details via this widget.
+
+TONE
+Short, warm, direct. No filler. Never boastful. Do not promise outcomes or pricing beyond what is listed. If unsure, say so and suggest they reach out.`;
+
+  const trigger       = document.getElementById('bk-chat-trigger');
+  const panel         = document.getElementById('bk-chat-panel');
+  const messagesEl    = document.getElementById('bk-chat-messages');
+  const input         = document.getElementById('bk-chat-input');
+  const sendBtn       = document.getElementById('bk-chat-send');
+  const captureForm   = document.getElementById('bk-capture-form');
+  const captureSubmit = document.getElementById('bk-capture-submit');
+
+  let messages      = [];
+  let isOpen        = false;
+  let isLoading     = false;
+  let exchangeCount = 0;
+  let captureShown  = false;
+
+  setTimeout(() => trigger.classList.add('visible'), 3000);
+
+  trigger.addEventListener('click', () => {
+    isOpen = !isOpen;
+    trigger.classList.toggle('open', isOpen);
+    panel.classList.toggle('open', isOpen);
+    if (isOpen && messages.length === 0) {
+      addAssistantMessage("Hi there. I can answer questions about BK Growth Advisory and how Bron works with B2B SaaS companies. What would you like to know?");
+    }
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  });
+
+  sendBtn.addEventListener('click', handleSend);
+
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+  });
+
+  async function handleSend() {
+    const text = input.value.trim();
+    if (!text || isLoading) return;
+
+    input.value = '';
+    input.style.height = 'auto';
+
+    addUserMessage(text);
+    messages.push({ role: 'user', content: text });
+    exchangeCount++;
+
+    setLoading(true);
+    const typingEl = addTyping();
+
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages, system: SYSTEM_PROMPT })
+      });
+
+      const data = await res.json();
+      const reply = data.content?.[0]?.text || "Something went wrong. Please try again or email bron@bkgrowthadvisory.com.au directly.";
+
+      typingEl.remove();
+      addAssistantMessage(reply);
+      messages.push({ role: 'assistant', content: reply });
+
+      if (exchangeCount >= 3 && !captureShown) {
+        captureForm.classList.add('visible');
+        captureShown = true;
+      }
+
+    } catch (err) {
+      typingEl.remove();
+      addAssistantMessage("Something went wrong on my end. You can reach Bron directly at bron@bkgrowthadvisory.com.au");
+    }
+
+    setLoading(false);
+    scrollToBottom();
+  }
+
+  function addUserMessage(text) {
+    const el = document.createElement('div');
+    el.className = 'bk-msg user';
+    el.textContent = text;
+    messagesEl.appendChild(el);
+    scrollToBottom();
+  }
+
+  function addAssistantMessage(text) {
+    const el = document.createElement('div');
+    el.className = 'bk-msg assistant';
+    el.textContent = text;
+    messagesEl.appendChild(el);
+    scrollToBottom();
+  }
+
+  function addTyping() {
+    const el = document.createElement('div');
+    el.className = 'bk-typing';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    messagesEl.appendChild(el);
+    scrollToBottom();
+    return el;
+  }
+
+  function setLoading(val) {
+    isLoading = val;
+    sendBtn.disabled = val;
+  }
+
+  function scrollToBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  captureSubmit.addEventListener('click', async () => {
+    const name  = document.getElementById('bk-name').value.trim();
+    const email = document.getElementById('bk-email').value.trim();
+    if (!email) return;
+
+    const summary = messages
+      .filter(m => m.role === 'user')
+      .map(m => m.content)
+      .join(' | ');
+
+    try {
+      await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, source: 'Website chat widget', questions: summary })
+      });
+      captureForm.innerHTML = '<p style="color:#8A9E52;font-family:Raleway,sans-serif;font-size:13px;padding:4px 0;">Thanks. Bron will be in touch.</p>';
+    } catch (e) {
+      captureForm.innerHTML = '<p style="color:#C09B5A;font-family:Raleway,sans-serif;font-size:13px;">Could not submit — email bron@bkgrowthadvisory.com.au directly.</p>';
+    }
+  });
+
+})();
+</script>
