@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funnel Diagnostic — BK Growth Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const C = {
+      deepForest: "#162118",
+      champagne: "#D4C09A",
+      antiqueGold: "#C09B5A",
+      sage: "#8A9E52",
+      warmIvory: "#F5EFE0",
+      charcoal: "#1E1E1E",
+      midGrey: "#8C8070",
+      paleGold: "#EDE0C4",
+      red: "#B85C45",
+    };
+
+    const FONTS = `@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;500;600&display=swap');`;
+
+    const BK_EMAIL = "bronwynkaraoglu@gmail.com";
+
+    const SECTIONS = [
+      { id: 1, number: "01", label: "Strategy Foundations" },
+      { id: 2, number: "02", label: "Funnel Visibility" },
+      { id: 3, number: "03", label: "Demand Generation" },
+      { id: 4, number: "04", label: "Content & Conversion" },
+      { id: 5, number: "05", label: "Retention & Expansion" },
+    ];
+
+    const QUESTIONS = [
+      {
+        id: 1, sectionId: 1,
+        title: "You have a written ICP, not a vague persona",
+        detail: "A real ICP names the firmographics, the trigger events, the problem the buyer is trying to solve, what they have already tried, and why they end up choosing a solution like yours. Without it, every downstream decision is a guess.",
+        advice: "This is usually the first thing I address with a new client. Everything downstream — messaging, channel selection, content, sales conversations — is only as good as your ICP. A slide that says 'mid-market fintech companies' is not an ICP. Start with your 10 best customers and ask what they have in common beyond the vertical: size, ownership structure, the specific trigger event that caused them to buy, who championed the deal. Get that on one page. Until you have it, you are spending money optimising for the wrong buyers.",
+      },
+      {
+        id: 2, sectionId: 1,
+        title: "Your positioning is differentiated, not just a category claim",
+        detail: "'We are the leading platform for X' is not positioning. Real positioning answers one question: why would someone choose you over the obvious alternative?",
+        advice: "Category claims and positioning are not the same thing. 'We are the leading platform for X' tells buyers you exist in a category. It gives them no reason to choose you. Real positioning answers one question in one clear sentence: why you over the obvious alternative. Here is a simple test. Ask three people in your business to say your positioning out loud. If you get three different answers, you have a messaging problem. Fix the sentence first, then align the team on it before briefing a single piece of content.",
+      },
+      {
+        id: 3, sectionId: 1,
+        title: "Sales and marketing share a written definition of a qualified lead",
+        detail: "If your MQL definition is not written down, agreed on, and reviewed quarterly, you do not have an alignment problem. You have a definition problem.",
+        advice: "This is the most common dysfunction I find in B2B SaaS teams, and it is entirely fixable. Marketing sends leads. Sales says they are junk. Nobody has agreed on what qualified actually means. The answer is not a more sophisticated lead scoring model. It is a 90-minute working session between sales and marketing to write the definition down, agree on it, and review it quarterly. Until that definition is shared, your marketing metrics and your sales metrics are measuring completely different things. That gap costs deals.",
+      },
+      {
+        id: 4, sectionId: 2,
+        title: "You track conversion rates at every funnel stage",
+        detail: "If you cannot answer how many visitors become leads, leads become meetings, and meetings become opportunities, your funnel is a black box.",
+        advice: "You cannot fix what you cannot see, and the constraint in your funnel is almost never where people assume it is. Without stage-by-stage conversion data, you end up spreading effort across the whole funnel rather than focusing on the actual leak. Start with four numbers: visitor-to-lead, lead-to-meeting, meeting-to-opportunity, opportunity-to-close. Even rough estimates built from CRM data and web analytics change the quality of every conversation about marketing investment. Once you have them, the priority becomes clear.",
+      },
+      {
+        id: 5, sectionId: 2,
+        title: "You know your average sales cycle and where deals stall",
+        detail: "More useful than average cycle length is knowing where in the cycle deals go quiet. After the demo? After the proposal? After legal review?",
+        advice: "Average sales cycle length is a useful benchmark. Where deals stall is the actionable insight. The place deals go quiet is almost always where a specific buyer concern has not been addressed. Missing information, an unanswered risk, a next step that was not made explicit. Map your last 20 lost or stalled deals and identify where they went dark. In most B2B SaaS businesses, the majority of stalled deals cluster at one or two stages. That pattern points directly to the content or conversation that is missing from your sales motion. Fix that before adding more top-of-funnel activity.",
+      },
+      {
+        id: 6, sectionId: 2,
+        title: "You have working attribution across your main channels",
+        detail: "You do not need perfect multi-touch attribution. You do need to know which channels are producing qualified pipeline.",
+        advice: "Perfect attribution is a distraction. Useful attribution is not. The question you need to answer is a simple one: which channels are producing qualified pipeline? First-touch and last-touch, even imperfectly applied, is enough to make a budget allocation decision. If your team cannot make a channel investment decision based on available data, the attribution is not working, regardless of what tools you have installed. Start with CRM source tracking and UTM parameters on all paid activity. That alone closes most of the gap.",
+      },
+      {
+        id: 7, sectionId: 2,
+        title: "You run a consistent pipeline review cadence",
+        detail: "If you only look at pipeline when a quarter is going wrong, you are already too late.",
+        advice: "Pipeline problems caught early are solvable. Pipeline problems caught at quarter-end are not. A weekly or fortnightly pipeline review, even 30 minutes, surfaces coverage gaps, stalled deals, and channel weaknesses while there is still time to respond. The format matters less than the frequency. Put it in the calendar, make it a joint marketing and sales conversation, and review the same metrics each time. Looking at it informally is not a cadence. It is an avoidance strategy that tends to show up as a missed quarter.",
+      },
+      {
+        id: 8, sectionId: 3,
+        title: "You have at least one compounding channel",
+        detail: "Paid advertising works until you stop paying. A compounding channel, such as SEO, a referral programme, a community, or a newsletter, keeps producing over time.",
+        advice: "If your pipeline depends entirely on paid channels, you are renting every lead. The moment the budget is cut or the platform changes its algorithm, you have nothing. Compounding channels take longer to build but return value long after you stop actively investing. Every durable B2B SaaS marketing engine I have seen has at least one. The best choice depends on your ACV and how your buyers behave. The worst choice is to keep deferring it because paid is working today. Start building it before you need it. That is the whole point.",
+      },
+      {
+        id: 9, sectionId: 3,
+        title: "No single channel represents more than 50% of your pipeline",
+        detail: "Algorithm changes, rising CPCs, platform policy shifts. Any of these can take out a single-channel model quickly.",
+        advice: "Single-channel dependency is a pipeline risk that gets ignored until it fails. A Google algorithm update, a Meta policy change, a spike in CPCs, any of these can remove 30 to 40 percent of your pipeline in weeks. The fix is not to be active on every channel. It is to have two or three working well enough that losing one does not create a crisis. Run a source report on your pipeline now. If any single channel is above 50 percent, that is your most urgent marketing risk, more urgent than any individual campaign or creative test you are currently running.",
+      },
+      {
+        id: 10, sectionId: 3,
+        title: "You are nurturing leads who are not ready to buy now",
+        detail: "At any given moment, roughly 97% of your addressable market is not in an active buying cycle. Most marketing programmes optimise for the 3% who are.",
+        advice: "The buyers who are not ready today will be ready eventually. When they are, you want to already be the most familiar and credible option in the conversation. A basic nurture programme does not need to be sophisticated to work. Six to eight emails over three months, each delivering a genuine insight relevant to the problem your product solves, changes the quality of inbound dramatically. The companies that get this right generate better leads because those contacts are already warm when they raise their hand. Without it, you are generating pipeline for competitors who are staying front of mind with your market.",
+      },
+      {
+        id: 11, sectionId: 4,
+        title: "You have content for every stage of the buying journey",
+        detail: "Most B2B SaaS content programmes are heavy on awareness and thin on decision-stage content, which is consistently the highest-ROI content to produce.",
+        advice: "Awareness content builds an audience. Decision-stage content closes deals. The imbalance I see most often is the same: too many blogs and LinkedIn posts, not enough case studies, comparison pages, ROI frameworks, and proof-point documents. A buyer who is three weeks from a purchase decision needs completely different information than one who just discovered the problem exists. Audit your content library by buyer stage. If decision-stage content is thin or absent, start there. The payback is faster than any awareness campaign you could run.",
+      },
+      {
+        id: 12, sectionId: 4,
+        title: "You have strong proof points, not just testimonials",
+        detail: "A quote that says 'this product changed our business' is close to worthless. What changed, by how much, and in what timeframe?",
+        advice: "Vague testimonials are table stakes. Buyers expect them and discount them accordingly. What moves deals forward is specific outcome data: what changed, by how much, in what timeframe. Go back to your three best customers and ask for one number each. Revenue increase, time saved per week, churn rate reduction, whatever is most relevant to your buyer's decision. One specific outcome from a real customer in a relevant segment is worth ten quotes about how much they love the product. If you do not have outcome data yet, making it your next customer conversation priority is the right call.",
+      },
+      {
+        id: 13, sectionId: 4,
+        title: "Your trial or demo process removes friction, not adds it",
+        detail: "Long booking flows, multi-step qualification forms, and slow response times kill momentum at the highest-intent moment in your funnel.",
+        advice: "The moment a prospect decides to take action is the highest-intent moment in your entire funnel. Adding friction at that point is handing the deal to a competitor who makes it easier. Long booking flows, qualification forms with too many fields, slow response times, each of these kills momentum when motivation is at its peak. Audit the path from 'I want to see the product' to 'I am in the product' and count every click. A motivated buyer should be able to book a demo or start a trial in under 90 seconds. Every step beyond that is a leak you can measure and fix.",
+      },
+      {
+        id: 14, sectionId: 5,
+        title: "You measure net revenue retention, not just new ARR",
+        detail: "New ARR growth built on a leaky base is a treadmill. NRR is the metric that most honestly reflects the health of your business.",
+        advice: "If you are churning 15 percent of revenue annually and celebrating top-of-funnel growth, you are working harder for less, and that gap compounds over time. Net revenue retention, what percentage of last year's revenue is still with you including expansion, is the most honest measure of whether your business model is working. For B2B SaaS mid-market, 110 percent NRR and above is healthy. Below 100 percent means you are refilling a leaking bucket. Marketing can directly influence NRR through onboarding campaigns, expansion plays, and customer education. If your team is not tracking it, they are only seeing half the picture.",
+      },
+      {
+        id: 15, sectionId: 5,
+        title: "Marketing is involved in onboarding and retention, not just acquisition",
+        detail: "The best acquisition channel is a customer who stays and expands. High-performing B2B SaaS businesses have marketing active past the point of close.",
+        advice: "Handing off at the point of close and never looking back leaves significant revenue on the table. Marketing has a direct role in whether customers activate, adopt the product deeply, and expand. The land is just the beginning. This does not require a full customer marketing programme from day one. Start with one initiative: an onboarding email sequence tied to activation milestones, a quarterly customer newsletter, or an expansion campaign triggered by usage signals. Own one thing, prove the commercial impact, then build from there. The teams that do this grow faster and more predictably than the ones that stop at the close.",
+      },
+    ];
+
+    function getPriorities(answers) {
+      return QUESTIONS.filter((q) => answers[q.id] === false);
+    }
+
+    function getVerdict(noCount) {
+      if (noCount === 0) return {
+        label: "Strong foundations",
+        colour: C.sage,
+        summary: "Your funnel is in good shape across all five areas. The work now is about depth and compounding — going from functional to excellent in the areas that most directly move your growth rate.",
+      };
+      if (noCount <= 3) return {
+        label: "A few targeted gaps",
+        colour: C.antiqueGold,
+        summary: "You have most of the foundations in place. The gaps below are specific and fixable. Address them in order rather than all at once, and you will see a real difference in pipeline predictability within 90 days.",
+      };
+      if (noCount <= 7) return {
+        label: "Structural gaps present",
+        colour: "#C09B5A",
+        summary: "You have enough working to generate pipeline, but the gaps are creating drag on predictability and efficiency. These issues are connected. Fixing the strategy foundations first will make the demand generation gaps easier and faster to close.",
+      };
+      return {
+        label: "Significant work needed",
+        colour: C.red,
+        summary: "Pipeline unpredictability at this stage is structural, not situational. The gaps are significant, but they are clear, which means the path forward is clear too. The priority is sequencing: fix strategy foundations before investing further in demand generation. Doing it in that order produces results faster.",
+      };
+    }
+
+    function getPriorityText(noGaps) {
+      if (noGaps.length === 0) return null;
+      const shortLabels = {
+        1: "ICP definition", 2: "positioning clarity", 3: "lead qualification alignment",
+        4: "funnel stage visibility", 5: "sales cycle analysis", 6: "channel attribution",
+        7: "pipeline review cadence", 8: "a compounding channel", 9: "channel concentration risk",
+        10: "lead nurture", 11: "full-funnel content", 12: "outcome-based proof points",
+        13: "demo or trial friction", 14: "NRR measurement", 15: "post-sale marketing involvement",
+      };
+      const top = noGaps.slice(0, 3).map((q) => shortLabels[q.id]);
+      if (top.length === 1) return top[0];
+      if (top.length === 2) return `${top[0]} and ${top[1]}`;
+      return `${top[0]}, ${top[1]}, and ${top[2]}`;
+    }
+
+    // Build the mailto link with full results in the email body
+    function buildMailtoLink(answers) {
+      const yesCount = QUESTIONS.filter((q) => answers[q.id] === true).length;
+      const noGaps = getPriorities(answers);
+      const verdict = getVerdict(noGaps.length);
+
+      const subject = `My BK Growth Advisory Funnel Health Results — ${yesCount}/15`;
+
+      let body = `FUNNEL HEALTH DIAGNOSTIC RESULTS\n`;
+      body += `BK Growth Advisory — bkgrowthadvisory.com.au\n`;
+      body += `${"=".repeat(50)}\n\n`;
+
+      body += `OVERALL SCORE: ${yesCount} / 15\n`;
+      body += `VERDICT: ${verdict.label}\n\n`;
+      body += `${verdict.summary}\n\n`;
+
+      body += `${"=".repeat(50)}\n`;
+      body += `SECTION BREAKDOWN\n`;
+      body += `${"=".repeat(50)}\n\n`;
+
+      SECTIONS.forEach((s) => {
+        const qs = QUESTIONS.filter((q) => q.sectionId === s.id);
+        const yes = qs.filter((q) => answers[q.id] === true).length;
+        body += `${s.number} ${s.label}: ${yes}/${qs.length}\n`;
+        qs.forEach((q) => {
+          const ans = answers[q.id] === true ? "YES" : "NO";
+          body += `  [${ans}] ${q.title}\n`;
+        });
+        body += `\n`;
+      });
+
+      if (noGaps.length > 0) {
+        body += `${"=".repeat(50)}\n`;
+        body += `GAPS TO ADDRESS\n`;
+        body += `${"=".repeat(50)}\n\n`;
+
+        noGaps.forEach((q, i) => {
+          const sec = SECTIONS.find((s) => s.id === q.sectionId);
+          const label = i === 0 ? "START HERE" : i === 1 ? "THEN THIS" : "ALSO ADDRESS";
+          body += `${label} — ${sec.label}\n`;
+          body += `${q.title}\n\n`;
+          body += `${q.advice}\n\n`;
+          body += `${"-".repeat(40)}\n\n`;
+        });
+      } else {
+        body += `No gaps identified. Strong foundations across all five areas.\n\n`;
+      }
+
+      body += `${"=".repeat(50)}\n`;
+      body += `Ready to talk through what you found?\n\n`;
+      body += `Book a free 30-minute diagnostic call with Bron:\n`;
+      body += `https://calendly.com/bronwynkaraoglu/30min\n\n`;
+      body += `No pitch. Just a direct conversation about where your constraint is\n`;
+      body += `and what is worth prioritising first.\n\n`;
+      body += `Bron Karaoglu\n`;
+      body += `Founder, BK Growth Advisory\n`;
+      body += `bkgrowthadvisory.com.au\n`;
+
+      const encoded = `mailto:?cc=${encodeURIComponent(BK_EMAIL)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      return encoded;
+    }
+
+    const BASE_CSS = `
+      ${FONTS}
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      .fade { animation: fadeUp 0.45s ease forwards; opacity: 0; }
+      .fade-1 { animation: fadeUp 0.45s 0.1s ease forwards; opacity: 0; }
+      .fade-2 { animation: fadeUp 0.45s 0.2s ease forwards; opacity: 0; }
+      .fade-3 { animation: fadeUp 0.45s 0.32s ease forwards; opacity: 0; }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .btn {
+        font-family: 'Raleway', sans-serif;
+        font-size: 11.5px;
+        font-weight: 600;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        cursor: pointer;
+        border: 1.5px solid;
+        transition: background 0.16s, color 0.16s, border-color 0.16s;
+        padding: 13px 26px;
+        line-height: 1;
+      }
+      .btn-yes { background: transparent; border-color: ${C.sage}; color: ${C.sage}; }
+      .btn-yes:hover { background: ${C.sage}; color: ${C.deepForest}; }
+      .btn-no  { background: transparent; border-color: ${C.red}; color: ${C.red}; }
+      .btn-no:hover { background: ${C.red}; color: #fff; }
+      .btn-ghost { background: transparent; border-color: ${C.antiqueGold}; color: ${C.champagne}; }
+      .btn-ghost:hover { background: ${C.antiqueGold}; color: ${C.deepForest}; }
+      .btn-solid { background: ${C.antiqueGold}; border-color: ${C.antiqueGold}; color: ${C.deepForest}; }
+      .btn-solid:hover { background: ${C.champagne}; border-color: ${C.champagne}; }
+      .btn-email { background: transparent; border-color: ${C.champagne}; color: ${C.champagne}; }
+      .btn-email:hover { background: ${C.champagne}; color: ${C.deepForest}; }
+    `;
+
+    function Logo({ small }) {
+      return (
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: small ? 22 : 46, fontWeight: 600, color: C.champagne, lineHeight: 1 }}>BK</span>
+          <div style={{ width: 1, height: small ? 18 : 34, background: C.antiqueGold }} />
+          <span style={{ fontFamily: "'Raleway', sans-serif", fontSize: small ? 9 : 11, fontWeight: 500, color: C.antiqueGold, letterSpacing: "0.2em", textTransform: "uppercase", lineHeight: 1.4 }}>Growth<br />Advisory</span>
+        </div>
+      );
+    }
+
+    function ProgressHeader({ answered }) {
+      return (
+        <div>
+          <div style={{ padding: "16px 28px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: `1px solid rgba(192,155,90,0.15)` }}>
+            <Logo small />
+            <span style={{ color: C.midGrey, fontSize: 11, letterSpacing: "0.08em", fontFamily: "'Raleway', sans-serif" }}>{answered} / 15</span>
+          </div>
+          <div style={{ height: 2, background: "rgba(192,155,90,0.15)" }}>
+            <div style={{ height: "100%", width: `${(answered / 15) * 100}%`, background: C.antiqueGold, transition: "width 0.3s ease" }} />
+          </div>
+        </div>
+      );
+    }
+
+    function IntroScreen({ onStart }) {
+      return (
+        <div style={{ minHeight: "100vh", background: C.deepForest, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "48px 24px", fontFamily: "'Raleway', sans-serif" }}>
+          <style>{BASE_CSS}</style>
+          <div className="fade" style={{ marginBottom: 44 }}><Logo /></div>
+          <div className="fade-1" style={{ maxWidth: 500, textAlign: "center" }}>
+            <div style={{ width: 36, height: 1, background: C.antiqueGold, margin: "0 auto 28px" }} />
+            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(34px, 6vw, 52px)", fontWeight: 600, color: C.champagne, lineHeight: 1.1, marginBottom: 20 }}>
+              Funnel Health<br />Diagnostic
+            </h1>
+            <p style={{ color: C.midGrey, fontSize: 15, lineHeight: 1.7, marginBottom: 12 }}>
+              Unpredictable pipeline is not a bad luck problem. It is a systems problem.
+            </p>
+            <p style={{ color: C.midGrey, fontSize: 14, lineHeight: 1.7, marginBottom: 36 }}>
+              This diagnostic walks through 15 of the most common gaps I see in B2B SaaS marketing functions. Answer yes or no to each one honestly. Tick only what is genuinely working today, not what is planned or almost there. The gaps are your starting point.
+            </p>
+            <div style={{ display: "flex", gap: 36, justifyContent: "center", marginBottom: 40 }}>
+              {[["15", "questions"], ["5", "sections"], ["~5", "minutes"]].map(([n, l]) => (
+                <div key={l} style={{ textAlign: "center" }}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 600, color: C.champagne }}>{n}</div>
+                  <div style={{ color: C.midGrey, fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase" }}>{l}</div>
+                </div>
+              ))}
+            </div>
+            <button className="btn btn-solid" onClick={onStart}>Start the diagnostic</button>
+          </div>
+        </div>
+      );
+    }
+
+    function QuestionScreen({ answers, onAnswer, onComplete }) {
+      const answered = Object.keys(answers).length;
+      const currentQ = QUESTIONS.find((q) => answers[q.id] === undefined) || null;
+
+      if (!currentQ) {
+        return (
+          <div style={{ minHeight: "100vh", background: C.deepForest, fontFamily: "'Raleway', sans-serif" }}>
+            <style>{BASE_CSS}</style>
+            <ProgressHeader answered={15} />
+            <div style={{ maxWidth: 520, margin: "0 auto", padding: "64px 24px", textAlign: "center" }}>
+              <div style={{ width: 36, height: 1, background: C.antiqueGold, margin: "0 auto 28px" }} />
+              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 600, color: C.champagne, marginBottom: 14 }}>All done.</h2>
+              <p style={{ color: C.midGrey, fontSize: 15, lineHeight: 1.7, marginBottom: 32 }}>Your results are ready.</p>
+              <button className="btn btn-solid" onClick={onComplete}>See my results</button>
+            </div>
+          </div>
+        );
+      }
+
+      const section = SECTIONS.find((s) => s.id === currentQ.sectionId);
+      const qIndex = QUESTIONS.findIndex((q) => q.id === currentQ.id) + 1;
+
+      return (
+        <div style={{ minHeight: "100vh", background: C.deepForest, fontFamily: "'Raleway', sans-serif" }}>
+          <style>{BASE_CSS}</style>
+          <ProgressHeader answered={answered} />
+          <div style={{ maxWidth: 620, margin: "0 auto", padding: "36px 24px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 28 }}>
+              <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 13, color: C.antiqueGold, letterSpacing: "0.06em" }}>{section.number}</span>
+              <span style={{ width: 20, height: 1, background: "rgba(192,155,90,0.35)" }} />
+              <span style={{ color: C.midGrey, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}>{section.label}</span>
+            </div>
+
+            <div key={currentQ.id} className="fade">
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 12, color: "rgba(212,192,154,0.3)", marginBottom: 8, letterSpacing: "0.05em" }}>
+                {String(qIndex).padStart(2, "0")} of 15
+              </div>
+              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(22px, 3.5vw, 30px)", fontWeight: 600, color: C.champagne, lineHeight: 1.25, marginBottom: 20 }}>
+                {currentQ.title}
+              </h2>
+              <p style={{ color: C.midGrey, fontSize: 14, lineHeight: 1.75, marginBottom: 36, borderLeft: `2px solid rgba(192,155,90,0.2)`, paddingLeft: 16 }}>
+                {currentQ.detail}
+              </p>
+              <div style={{ display: "flex", gap: 12 }}>
+                <button className="btn btn-yes" style={{ flex: 1 }} onClick={() => onAnswer(currentQ.id, true)}>
+                  Yes, this is in place
+                </button>
+                <button className="btn btn-no" style={{ flex: 1 }} onClick={() => onAnswer(currentQ.id, false)}>
+                  No, this is a gap
+                </button>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: 5, marginTop: 52, justifyContent: "center", flexWrap: "wrap" }}>
+              {QUESTIONS.map((q) => {
+                const a = answers[q.id];
+                const isCur = q.id === currentQ.id;
+                return (
+                  <div key={q.id} style={{
+                    width: isCur ? 18 : 6, height: 6, borderRadius: 3,
+                    background: a === true ? C.sage : a === false ? C.red : isCur ? C.antiqueGold : "rgba(192,155,90,0.18)",
+                    transition: "all 0.2s ease",
+                  }} />
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function ResultsScreen({ answers, onRestart }) {
+      const yesCount = QUESTIONS.filter((q) => answers[q.id] === true).length;
+      const noGaps = getPriorities(answers);
+      const verdict = getVerdict(noGaps.length);
+      const priorityText = getPriorityText(noGaps);
+      const mailtoLink = buildMailtoLink(answers);
+
+      return (
+        <div style={{ minHeight: "100vh", background: C.warmIvory, fontFamily: "'Raleway', sans-serif" }}>
+          <style>{`
+            ${BASE_CSS}
+            .gap-card { padding: 24px; margin-bottom: 14px; background: #fff; border-left: 3px solid ${C.antiqueGold}; }
+            .section-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid ${C.paleGold}; }
+          `}</style>
+
+          <div style={{ background: C.deepForest, padding: "18px 28px" }}><Logo small /></div>
+
+          <div style={{ maxWidth: 660, margin: "0 auto", padding: "48px 24px 80px" }}>
+
+            {/* Score */}
+            <div className="fade" style={{ textAlign: "center", marginBottom: 48 }}>
+              <div style={{
+                display: "inline-flex", alignItems: "center", justifyContent: "center",
+                width: 88, height: 88, borderRadius: "50%", border: `2px solid ${verdict.colour}`, marginBottom: 20,
+              }}>
+                <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 600, color: C.charcoal, lineHeight: 1 }}>
+                  {yesCount}<span style={{ fontSize: 15, color: C.midGrey, fontWeight: 400 }}>/15</span>
+                </span>
+              </div>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(26px, 4vw, 38px)", fontWeight: 600, color: C.charcoal, marginBottom: 14 }}>
+                {verdict.label}
+              </h1>
+              <p style={{ color: "#4a4a4a", fontSize: 15, lineHeight: 1.7, maxWidth: 500, margin: "0 auto 16px" }}>
+                {verdict.summary}
+              </p>
+              {priorityText && (
+                <div style={{ display: "inline-block", background: "#fff", border: `1px solid ${C.paleGold}`, padding: "13px 20px", marginTop: 10, maxWidth: 480, textAlign: "left" }}>
+                  <span style={{ color: C.midGrey, fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em" }}>Start here: </span>
+                  <span style={{ color: C.charcoal, fontSize: 14, fontWeight: 500 }}>{priorityText}.</span>
+                </div>
+              )}
+            </div>
+
+            {/* Section breakdown */}
+            <div className="fade-1" style={{ marginBottom: 48 }}>
+              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 600, color: C.charcoal, marginBottom: 4 }}>Section breakdown</h2>
+              <div style={{ width: 36, height: 1, background: C.antiqueGold, marginBottom: 18 }} />
+              {SECTIONS.map((s) => {
+                const qs = QUESTIONS.filter((q) => q.sectionId === s.id);
+                const yes = qs.filter((q) => answers[q.id] === true).length;
+                const no = qs.length - yes;
+                return (
+                  <div key={s.id} className="section-row">
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 15, color: C.antiqueGold }}>{s.number}</span>
+                      <span style={{ color: C.charcoal, fontSize: 14, fontWeight: 500 }}>{s.label}</span>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      {no > 0 && <span style={{ color: C.red, fontSize: 11, fontWeight: 500 }}>{no} gap{no > 1 ? "s" : ""}</span>}
+                      <span style={{ color: no === 0 ? C.sage : C.midGrey, fontFamily: "'Cormorant Garamond', serif", fontSize: 18, fontWeight: 600 }}>{yes}/{qs.length}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Gap advice */}
+            {noGaps.length > 0 && (
+              <div className="fade-2" style={{ marginBottom: 56 }}>
+                <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 600, color: C.charcoal, marginBottom: 4 }}>Where to focus</h2>
+                <div style={{ width: 36, height: 1, background: C.antiqueGold, marginBottom: 8 }} />
+                <p style={{ color: C.midGrey, fontSize: 13, lineHeight: 1.65, marginBottom: 24 }}>
+                  Work through these in order. Getting strategy foundations right first will make everything else easier and faster to fix.
+                </p>
+                {noGaps.map((q, i) => {
+                  const sec = SECTIONS.find((s) => s.id === q.sectionId);
+                  const borderColour = i === 0 ? C.red : i === 1 ? "#C07040" : C.antiqueGold;
+                  const badgeColour = i === 0 ? C.red : i === 1 ? "#C07040" : C.antiqueGold;
+                  const badgeLabel = i === 0 ? "Start here" : i === 1 ? "Then this" : "Also address";
+                  return (
+                    <div key={q.id} className="gap-card" style={{ borderLeftColor: borderColour }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                        <span style={{ background: badgeColour, color: i < 2 ? "#fff" : C.deepForest, fontSize: 10, fontWeight: 600, letterSpacing: "0.1em", padding: "3px 8px", textTransform: "uppercase" }}>
+                          {badgeLabel}
+                        </span>
+                        <span style={{ color: C.midGrey, fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase" }}>{sec.label}</span>
+                      </div>
+                      <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 18, fontWeight: 600, color: C.charcoal, marginBottom: 10, lineHeight: 1.3 }}>
+                        {q.title}
+                      </h3>
+                      <p style={{ color: "#4a4a4a", fontSize: 13.5, lineHeight: 1.8 }}>
+                        {q.advice}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* CTA block */}
+            <div className="fade-3" style={{ background: C.deepForest, padding: "40px 32px", textAlign: "center" }}>
+              <div style={{ width: 36, height: 1, background: C.antiqueGold, margin: "0 auto 24px" }} />
+
+              {/* Email results section */}
+              <div style={{
+                background: "rgba(255,255,255,0.04)",
+                border: `1px solid rgba(192,155,90,0.25)`,
+                padding: "24px",
+                marginBottom: 28,
+                textAlign: "left",
+              }}>
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, fontWeight: 600, color: C.champagne, marginBottom: 8 }}>
+                  Save your results
+                </h3>
+                <p style={{ color: C.midGrey, fontSize: 13, lineHeight: 1.7, marginBottom: 16 }}>
+                  This will open an email with your full results pre-filled, including all your gaps and the advice for each one. Add your email address in the To field and hit send. You will have a copy to refer back to, and I will be copied in so I can review your results before we speak.
+                </p>
+                <a href={mailtoLink} style={{ textDecoration: "none" }}>
+                  <button className="btn btn-email" style={{ width: "100%", padding: "14px" }}>
+                    Email my results to myself
+                  </button>
+                </a>
+              </div>
+
+              {/* Book a call section */}
+              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(22px, 3vw, 28px)", fontWeight: 600, color: C.champagne, marginBottom: 12 }}>
+                Want to talk through what you found?
+              </h2>
+              <p style={{ color: C.midGrey, fontSize: 14, lineHeight: 1.7, maxWidth: 400, margin: "0 auto 8px" }}>
+                I offer a free 30-minute diagnostic call for founders and marketing leaders who want a direct conversation about where their constraint is.
+              </p>
+              <p style={{ color: C.midGrey, fontSize: 14, lineHeight: 1.7, maxWidth: 400, margin: "0 auto 24px" }}>
+                No pitch. Just a clear conversation about what to prioritise first.
+              </p>
+
+              <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+                <a href="https://calendly.com/bronwynkaraoglu/30min" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+                  <button className="btn btn-solid">Book a free call with Bron</button>
+                </a>
+                <button className="btn btn-ghost" onClick={onRestart}>Start again</button>
+              </div>
+
+              <div style={{ marginTop: 24, color: "rgba(140,128,112,0.5)", fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                Bron Karaoglu, Founder, BK Growth Advisory
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [screen, setScreen] = useState("intro");
+      const [answers, setAnswers] = useState({});
+
+      function handleAnswer(id, value) {
+        setAnswers((prev) => ({ ...prev, [id]: value }));
+      }
+
+      function handleRestart() {
+        setAnswers({});
+        setScreen("intro");
+      }
+
+      if (screen === "intro") return <IntroScreen onStart={() => setScreen("questions")} />;
+      if (screen === "questions") return <QuestionScreen answers={answers} onAnswer={handleAnswer} onComplete={() => setScreen("results")} />;
+      if (screen === "results") return <ResultsScreen answers={answers} onRestart={handleRestart} />;
+      return null;
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
