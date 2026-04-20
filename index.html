@@ -2399,7 +2399,7 @@
       })
       .then(function(response) {
         if (response.ok) {
-          window.open('https://www.bkgrowthadvisory.com.au/Downloads/BK-Funnel-Health-Checklist.pdf', '_blank');
+          window.location.href = '/funnel-diagnostic.html';
 
           fetch('https://brevo-contact-proxy.bronwynkaraoglu.workers.dev', {
             method: 'POST',
