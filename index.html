@@ -967,7 +967,7 @@
       margin-bottom: 80px;
     }
 
-    .process-hd .intro { margin: 0 auto; text-align: center; }
+    .process-hd .intro { margin: 0 auto; text-align: center; display: block; }
 
     .steps {
       display: grid;
@@ -988,7 +988,7 @@
       pointer-events: none;
     }
 
-    .step { text-align: center; padding: 0 20px; }
+    .step { text-align: center; padding: 0 20px; display: flex; flex-direction: column; align-items: center; }
 
     .step-ring {
       display: flex;
@@ -1790,7 +1790,7 @@
             </svg>
           </a>
           <a href="#checklist" class="btn-outline-gold">
-            Download the Funnel Health Checklist
+            Get the Free Funnel Diagnostic
           </a>
         </div>
 
@@ -2394,8 +2394,8 @@
 
       fetch('https://formspree.io/f/mbdqdwlq', {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: document.querySelector('#checklist-form input[name="email"]').value })
       })
       .then(function(response) {
         if (response.ok) {
