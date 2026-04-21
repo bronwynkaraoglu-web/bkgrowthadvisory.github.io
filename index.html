@@ -1375,7 +1375,7 @@
       border-radius: var(--r);
     }
 
-    .gas-step { text-align: center; }
+    .gas-step { text-align: center; display: flex; flex-direction: column; align-items: center; }
 
     .gas-num {
       font-family: 'Cormorant Garamond', Georgia, serif;
@@ -1704,7 +1704,7 @@
       .cred-bar-item { padding: 16px 24px; }
 
       .gas-steps { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
-      .gas-step { text-align: left; display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: start; }
+      .gas-step { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
       .gas-num { font-size: 2rem; }
 
       .sprint-grid { grid-template-columns: 1fr; }
@@ -1816,7 +1816,7 @@
           </div>
           <div class="cred-bar-divider" aria-hidden="true"></div>
           <div class="cred-bar-item">
-            <div class="cred-bar-outcome">PE Acquisition</div>
+            <div class="cred-bar-outcome">Institutional Exit</div>
             <div class="cred-bar-company">Ignition</div>
             <div class="cred-bar-detail">$100M+ ARR</div>
           </div>
@@ -1860,7 +1860,7 @@
                 Over the past fifteen years, I've held senior marketing roles at B2B SaaS companies at every stage from early growth through to public market and acquisition.
               </p>
               <p>
-                I was part of the marketing leadership team at <strong>SiteMinder</strong> during the company's trajectory to becoming an Australian unicorn, culminating in an ASX listing at a $1B+ valuation. I contributed to the marketing function at <strong>Ignition</strong> during the company's VC-backed growth to $100M+ ARR, ahead of a PE acquisition. At <strong>Genbook</strong>, I worked on the PLG growth model that supported the company's acquisition by Booksy.
+                I was part of the marketing leadership team at <strong>SiteMinder</strong> during the company's trajectory to becoming an Australian unicorn, culminating in an ASX listing at a $1B+ valuation. I contributed to the marketing function at <strong>Ignition</strong> during the company's VC-backed growth to $100M+ ARR, through to a significant institutional exit. At <strong>Genbook</strong>, I worked on the PLG growth model that supported the company's acquisition by Booksy.
               </p>
               <p>
                 What that experience gives me is pattern recognition that most marketers don't have. I've watched what breaks as companies scale, what separates the businesses that exit well from those that plateau, and which marketing decisions compound over time versus which ones look good in a quarterly review.
@@ -2125,18 +2125,18 @@
       <div class="container">
         <div class="checklist-wrap" data-sr>
           <span class="label">Free Resource</span>
-          <h2 class="checklist-h2" id="checklist-h2">The Funnel Health Checklist</h2>
-          <p class="checklist-sub">15 signals that tell you where revenue is leaking.</p>
-          <p class="checklist-body">If pipeline is unpredictable, it is usually one of fifteen things. This checklist walks through each one. It takes 10 minutes to read and gives you a clear starting point before any conversation.</p>
+          <h2 class="checklist-h2" id="checklist-h2">Free Funnel Diagnostic</h2>
+          <p class="checklist-sub">Find out where your revenue is leaking.</p>
+          <p class="checklist-body">Most B2B SaaS companies at your stage have one or two constraints killing pipeline. This diagnostic helps you identify yours before we talk. Takes 10 minutes.</p>
 
           <div id="checklist-wrapper">
             <form class="checklist-form" id="checklist-form">
               <input type="email" name="email" class="checklist-input" placeholder="Your work email" required aria-label="Your work email">
-              <button type="submit" class="btn-checklist">Send me the checklist</button>
-              <p class="checklist-note">No sequences. No sales follow-up. One email with the PDF.</p>
+              <button type="submit" class="btn-checklist">Send me the diagnostic</button>
+              <p class="checklist-note">No sequences. No sales follow-up. One email with the resource.</p>
             </form>
             <p id="checklist-success" style="display:none; color:#D4C09A; font-family: Inter, sans-serif; font-size: 1rem; line-height: 1.65;">
-              You are all set. Check your inbox — the checklist is on its way.
+              You are all set. Check your inbox — the diagnostic is on its way.
             </p>
           </div>
         </div>
