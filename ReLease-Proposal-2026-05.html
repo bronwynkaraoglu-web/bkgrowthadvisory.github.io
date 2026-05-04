@@ -151,6 +151,25 @@
       letter-spacing: 0.06em;
     }
 
+    .proposal-meta-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .confidential-badge {
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--antique-gold);
+      border: 1px solid rgba(192,155,90,0.35);
+      border-radius: 2px;
+      padding: 3px 8px;
+    }
+
     /* ── MAIN CONTENT ── */
     .content-wrap {
       max-width: 860px;
@@ -776,7 +795,10 @@
         <div class="gold-rule"></div>
         <h1>A Proposal for Re-Leased</h1>
         <p class="prepared-for">Prepared for Dai Williams and Jana Hurley, Re-Leased</p>
-        <p class="proposal-date">May 2026</p>
+        <div class="proposal-meta-row">
+          <p class="proposal-date">May 2026</p>
+          <span class="confidential-badge">Private &amp; Confidential</span>
+        </div>
       </div>
 
     </div>
